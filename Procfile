@@ -1,1 +1,1 @@
-web: mvn exec:java
+web: java -cp target/classes:target/dependency/* org.openkoreantext.heroku.Main
