@@ -2,9 +2,11 @@ package org.openkoreantext;
 
 import java.util.List;
 
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.openkoreantext.processor.KoreanTokenJava;
@@ -24,10 +26,12 @@ public class Processor {
      */
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String processor() {
+    public String processor(
+        @DefaultValue("오픈코리안텍스트") @QueryParam("text") String text
+    ) {
         List<KoreanTokenJava> parsed =
             OpenKoreanTextProcessorJava.tokensToJavaKoreanTokenList(
-                OpenKoreanTextProcessorJava.tokenize("오픈코리안텍스트 한국어 분석기 API입니다"));
+                OpenKoreanTextProcessorJava.tokenize(text));
         return parsed.toString();
     }
 }
