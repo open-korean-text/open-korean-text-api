@@ -13,8 +13,8 @@ import org.openkoreantext.processor.OpenKoreanTextProcessorJava;
 /**
  * Root resource (exposed at "myresource" path)
  */
-@Path("myresource")
-public class MyResource {
+@Path("processor")
+public class Processor {
 
     /**
      * Method handling HTTP GET requests. The returned object will be sent
