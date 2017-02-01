@@ -1,14 +1,11 @@
 package org.openkoreantext;
 
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import jersey.repackaged.com.google.common.collect.ImmutableMap;
 import org.json.simple.JSONObject;
@@ -19,8 +16,8 @@ import scala.collection.Seq;
 /**
  * Root resource (exposed at "myresource" path)
  */
-@Path("processor")
-public class Processor {
+@Path("tokenize")
+public class TokenizerResource {
 
   /**
    * Method handling HTTP GET requests. The returned object will be sent
@@ -30,26 +27,13 @@ public class Processor {
    */
   @GET
   @Produces(MediaType.TEXT_PLAIN)
-  public String processorPost(
+  public String tokenizeGet(
       @DefaultValue("오픈코리안텍스트") @QueryParam("text") String text
   ) {
-    JSONObject json = tokenizeJson(text);
-
-    return json.toJSONString();
+    return tokenizeJson(text).toJSONString();
   }
 
-  @POST
-  @Consumes(MediaType.TEXT_PLAIN)
-  @Produces(MediaType.TEXT_PLAIN)
-  public Response processorGet(
-      @DefaultValue("오픈코리안텍스트") @QueryParam("text") String text
-  ) {
-    JSONObject json = tokenizeJson(text);
-
-    return Response.status(201).entity( json.toJSONString()).build();
-  }
-
-  private JSONObject tokenizeJson(@DefaultValue("오픈코리안텍스트") @QueryParam("text") String text) {
+  private JSONObject tokenizeJson(String text) {
     Seq<KoreanTokenizer.KoreanToken> parsed = OpenKoreanTextProcessorJava.tokenize(text);
 
     return new JSONObject(
