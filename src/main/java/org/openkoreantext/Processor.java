@@ -32,10 +32,11 @@ public class Processor {
   ) {
     Seq<KoreanTokenizer.KoreanToken> parsed = OpenKoreanTextProcessorJava.tokenize(text);
 
-    JSONObject json = new JSONObject(ImmutableMap.of(
-        "tokens", OpenKoreanTextProcessorJava.tokensToJavaKoreanTokenList(parsed),
-        "token_strings", OpenKoreanTextProcessorJava.tokensToJavaStringList(parsed)
-    ));
+    JSONObject json = new JSONObject(
+        ImmutableMap.of(
+            "tokens", OpenKoreanTextProcessorJava.tokensToJavaKoreanTokenList(parsed),
+            "token_strings", OpenKoreanTextProcessorJava.tokensToJavaStringList(parsed)
+        ));
 
     return json.toJSONString();
   }
