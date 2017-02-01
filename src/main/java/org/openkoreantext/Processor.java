@@ -24,7 +24,7 @@ public class Processor {
      */
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String getIt() {
+    public String processor() {
         List<KoreanTokenJava> parsed =
             OpenKoreanTextProcessorJava.tokensToJavaKoreanTokenList(
                 OpenKoreanTextProcessorJava.tokenize("오픈코리안텍스트 한국어 분석기 API입니다"));
