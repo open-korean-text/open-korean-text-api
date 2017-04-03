@@ -1,8 +1,10 @@
 package org.openkoreantext.api;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.simple.JSONObject;
+import org.openkoreantext.processor.KoreanTokenJava;
 import org.openkoreantext.processor.OpenKoreanTextProcessorJava;
 import org.openkoreantext.processor.phrase_extractor.KoreanPhraseExtractor;
 import org.openkoreantext.processor.tokenizer.KoreanTokenizer;
@@ -32,11 +34,21 @@ public class TokenizerResource {
 	private JSONObject tokenizeJson(String text) {
 		CharSequence normalized = OpenKoreanTextProcessorJava.normalize(text);
 		Seq<KoreanTokenizer.KoreanToken> tokens = OpenKoreanTextProcessorJava.tokenize(normalized);
+		List<KoreanTokenJava> tokenList = OpenKoreanTextProcessorJava.tokensToJavaKoreanTokenList(tokens);
+		
 		return new JSONObject(
 		        ImmutableMap.of(
-		            "tokens", OpenKoreanTextProcessorJava.tokensToJavaKoreanTokenList(tokens),
+		            "tokens", convertTokenStrList(tokenList),
 		            "token_strings", OpenKoreanTextProcessorJava.tokensToJavaStringList(tokens)
 		        ));
+	}
+	
+	private <T> List<String> convertTokenStrList(List<T> tokenList) {
+		List<String> tokenStrList = new ArrayList<String>();
+		for (Object token: tokenList) {
+			tokenStrList.add(token.toString());
+		}
+		return tokenStrList;
 	}
 	
 	public String stemGet(String text) {
@@ -47,9 +59,10 @@ public class TokenizerResource {
 		CharSequence normalized = OpenKoreanTextProcessorJava.normalize(text);
 		Seq<KoreanTokenizer.KoreanToken> tokens = OpenKoreanTextProcessorJava.tokenize(normalized);
 		Seq<KoreanTokenizer.KoreanToken> stemmed = OpenKoreanTextProcessorJava.stem(tokens);
+		List<KoreanTokenJava> tokenList = OpenKoreanTextProcessorJava.tokensToJavaKoreanTokenList(stemmed);
 		return new JSONObject(
 		        ImmutableMap.of(
-		            "tokens", OpenKoreanTextProcessorJava.tokensToJavaKoreanTokenList(stemmed),
+		            "tokens", convertTokenStrList(tokenList),
 		            "token_strings", OpenKoreanTextProcessorJava.tokensToJavaStringList(stemmed)
 		        ));
 	}
@@ -62,9 +75,10 @@ public class TokenizerResource {
 		CharSequence normalized = OpenKoreanTextProcessorJava.normalize(text);
 		Seq<KoreanTokenizer.KoreanToken> tokens = OpenKoreanTextProcessorJava.tokenize(normalized);
 		List<KoreanPhraseExtractor.KoreanPhrase> phrases = OpenKoreanTextProcessorJava.extractPhrases(tokens, true, true);
+		
 		return new JSONObject(
 		        ImmutableMap.of(
-		            "phrases", phrases
+		            "phrases", convertTokenStrList(phrases)
         		));
 	}
 
