@@ -1,18 +1,19 @@
 package org.openkoreantext.api;
 
-import static org.junit.Assert.assertEquals;
-
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import spark.Spark;
 import spark.utils.IOUtils;
 import spark.utils.StringUtils;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.junit.Assert.assertEquals;
 
 public class KoreanTextControllerIntegrationTest {
     final private String NORMALIZE = "{\"strings\":\"오픈코리안텍스트\"}";
@@ -70,6 +71,15 @@ public class KoreanTextControllerIntegrationTest {
         assertMessage(response, EXTRACT);
     }
 
+    @Test
+    public void longParameterTest() {
+        String message = String.join("", Collections.nCopies(1100, TEXT));
+        Map<String, Object> response = makeRequest("GET", "/tokenize?text=" + message, null);
+        assertEquals(414, response.get("status"));
+        response = makeRequest("POST", "/normalize", message);
+        assertEquals(200, response.get("status"));
+    }
+
     private void assertMessage(Map<String, Object> response, String expected) {
         assertEquals(200, response.get("status"));
         assertEquals(expected, response.get("body"));
@@ -86,10 +96,13 @@ public class KoreanTextControllerIntegrationTest {
                           .write(data.getBytes());
             }
             connection.connect();
-            String body = IOUtils.toString(connection.getInputStream());
-            Map<String, Object> request = new HashMap<String, Object>();
-            request.put("status", connection.getResponseCode());
-            request.put("body", body);
+            Map<String, Object> request = new HashMap<>();
+            int responseCode = connection.getResponseCode();
+            request.put("status", responseCode);
+            if (responseCode >= 200 && responseCode <= 299) {
+                String body = IOUtils.toString(connection.getInputStream());
+                request.put("body", body);
+            }
             return request;
         } catch (Exception e) {
             e.printStackTrace();
