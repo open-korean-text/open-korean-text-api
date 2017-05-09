@@ -13,7 +13,7 @@ import com.google.common.collect.ImmutableMap;
 
 import scala.collection.Seq;
 
-public class TokenizerResource {
+public class OpenKoreanTextHelper {
 	
 	public String normalizeGet(String text) {
 		return normalizeJson(text).toJSONString();
@@ -49,22 +49,6 @@ public class TokenizerResource {
 			tokenStrList.add(token.toString());
 		}
 		return tokenStrList;
-	}
-	
-	public String stemGet(String text) {
-		return stemJson(text).toJSONString();
-	}
-	
-	private JSONObject stemJson(String text) {
-		CharSequence normalized = OpenKoreanTextProcessorJava.normalize(text);
-		Seq<KoreanTokenizer.KoreanToken> tokens = OpenKoreanTextProcessorJava.tokenize(normalized);
-		Seq<KoreanTokenizer.KoreanToken> stemmed = OpenKoreanTextProcessorJava.stem(tokens);
-		List<KoreanTokenJava> tokenList = OpenKoreanTextProcessorJava.tokensToJavaKoreanTokenList(stemmed);
-		return new JSONObject(
-		        ImmutableMap.of(
-		            "tokens", convertTokenStrList(tokenList),
-		            "token_strings", OpenKoreanTextProcessorJava.tokensToJavaStringList(stemmed)
-		        ));
 	}
 	
 	public String extractPhrasesGet(String text) {

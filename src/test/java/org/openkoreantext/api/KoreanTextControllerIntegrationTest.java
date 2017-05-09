@@ -18,8 +18,6 @@ public class KoreanTextControllerIntegrationTest {
     final private String NORMALIZE = "{\"strings\":\"오픈코리안텍스트\"}";
     final private String TOKENIZE = "{\"tokens\":[\"오픈(Noun: 0, 2)\",\"코리안(Noun: 2, 3)\",\"텍스트(Noun: 5, 3)\"],\"token_strings\":[\"오픈\"," +
         "\"코리안\",\"텍스트\"]}";
-    final private String STEM = "{\"tokens\":[\"오픈(Noun: 0, 2)\",\"코리안(Noun: 2, 3)\",\"텍스트(Noun: 5, 3)\"],\"token_strings\":[\"오픈\"," +
-        "\"코리안\",\"텍스트\"]}";
     final private String EXTRACT = "{\"phrases\":[\"오픈코리안텍스트(Noun: 0, 8)\",\"오픈(Noun: 0, 2)\",\"코리안(Noun: 2, 3)\",\"텍스트(Noun: 5, 3)\"]}";
     final private String TEXT = "오픈코리안텍스트";
 
@@ -52,14 +50,6 @@ public class KoreanTextControllerIntegrationTest {
         assertMessage(response, TOKENIZE);
         response = makeRequest("POST", "/tokenize?text", TEXT);
         assertMessage(response, TOKENIZE);
-    }
-
-    @Test
-    public void stemGetTest() {
-        Map<String, Object> response = makeRequest("GET", "/stem?text=" + TEXT, null);
-        assertMessage(response, STEM);
-        response = makeRequest("POST", "/stem", TEXT);
-        assertMessage(response, STEM);
     }
 
     @Test

@@ -44,5 +44,4 @@ jar 파일을 배포할 곳에 위치시킨 후 `java -jar {File name}` 을 수�
 ---- | ----
 정규화 | https://open-korean-text.herokuapp.com/normalize?text=오픈코리안텍스트
 토큰화 | https://open-korean-text.herokuapp.com/tokenize?text=오픈코리안텍스트
-어근화 | https://open-korean-text.herokuapp.com/stem?text=오픈코리안텍스트
 어구 추출 | https://open-korean-text.herokuapp.com/extractPhrases?text=오픈코리안텍스트

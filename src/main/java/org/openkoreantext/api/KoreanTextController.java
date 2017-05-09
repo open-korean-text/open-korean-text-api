@@ -5,7 +5,7 @@ import static spark.Spark.path;
 import static spark.Spark.post;
 
 public class KoreanTextController {
-    TokenizerResource tokenizerResource = new TokenizerResource();
+    OpenKoreanTextHelper tokenizerResource = new OpenKoreanTextHelper();
     final String PARAM_TEXT = "text";
 
     public KoreanTextController() {
@@ -16,10 +16,6 @@ public class KoreanTextController {
         path("/tokenize", () -> {
             get("", (req, res) -> tokenizerResource.tokenizeGet(req.queryParams(PARAM_TEXT)));
             post("", (req, res) -> tokenizerResource.tokenizeGet(req.body()));
-        });
-        path("/stem", () -> {
-            get("", (req, res) -> tokenizerResource.stemGet(req.queryParams(PARAM_TEXT)));
-            post("", (req, res) -> tokenizerResource.stemGet(req.body()));
         });
         path("/extractPhrases", () -> {
             get("", (req, res) -> tokenizerResource.extractPhrasesGet(req.queryParams(PARAM_TEXT)));
