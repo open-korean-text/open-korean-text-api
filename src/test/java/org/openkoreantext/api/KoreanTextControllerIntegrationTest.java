@@ -38,7 +38,7 @@ public class KoreanTextControllerIntegrationTest {
     }
 
     @Test
-    public void normalizeGetTest() {
+    public void normalizeTest() {
         Map<String, Object> response = makeRequest("GET", "/normalize?text=" + TEXT, null);
         assertMessage(response, NORMALIZE);
         response = makeRequest("POST", "/normalize", TEXT);
@@ -46,7 +46,7 @@ public class KoreanTextControllerIntegrationTest {
     }
 
     @Test
-    public void tokenizeGetTest() {
+    public void tokenizeTest() {
         Map<String, Object> response = makeRequest("GET", "/tokenize?text=" + TEXT, null);
         assertMessage(response, TOKENIZE);
         response = makeRequest("POST", "/tokenize?text", TEXT);
@@ -54,7 +54,7 @@ public class KoreanTextControllerIntegrationTest {
     }
 
     @Test
-    public void extractPhrasesTest() {
+    public void extractPhraseTest() {
         Map<String, Object> response = makeRequest("GET", "/extractPhrases?text=" + TEXT, null);
         assertMessage(response, EXTRACT);
         response = makeRequest("POST", "/extractPhrases", TEXT);

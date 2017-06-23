@@ -15,7 +15,7 @@ import scala.collection.Seq;
 
 public class OpenKoreanTextHelper {
 	
-	public String normalizeGet(String text) {
+	public String normalize(String text) {
 		return normalizeJson(text).toJSONString();
 	}
 	
@@ -27,7 +27,7 @@ public class OpenKoreanTextHelper {
 				));
 	}
 	
-	public String tokenizeGet(String text) {
+	public String tokenize(String text) {
 		return tokenizeJson(text).toJSONString();
 	}
 	
@@ -51,7 +51,7 @@ public class OpenKoreanTextHelper {
 		return tokenStrList;
 	}
 	
-	public String extractPhrasesGet(String text) {
+	public String extractPhrase(String text) {
 		return extractPhrasesJson(text).toJSONString();
 	}
 	
