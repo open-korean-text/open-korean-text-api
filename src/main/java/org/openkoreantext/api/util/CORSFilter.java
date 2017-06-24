@@ -6,7 +6,7 @@ import static spark.Spark.options;
 public class CORSFilter {
 	
 	static final String ORIGIN = "*";
-	static final String METHOD = "GET";
+	static final String METHOD = "GET, POST";
 	static final String HEADERS = "Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,";
 	
 	// Enables CORS on requests. This method is an initialization method and

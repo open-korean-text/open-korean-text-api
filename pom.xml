@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.openkoreantext</groupId>
 	<artifactId>org.openkoreantext.api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>open-korean-text-api</name>
 	<description>Open korean text api service</description>
 	<dependencies>
@@ -74,7 +74,7 @@
 					<jdkVersion>1.8</jdkVersion>
 					<appName>open-korean-text</appName>
 					<processTypes>
-						<web>java -jar ./target/org.openkoreantext.api-0.0.1-SNAPSHOT-jar-with-dependencies.jar</web>
+						<web>java -jar ./target/org.openkoreantext.api-0.0.1-jar-with-dependencies.jar</web>
 					</processTypes>
 				</configuration>
 			</plugin>
