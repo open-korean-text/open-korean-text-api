@@ -12,6 +12,10 @@
 			<name>Maven Repository</name>
 			<url>http://repo1.maven.org/maven2</url>
 		</repository>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
 	</repositories>
 	<dependencies>
 		<dependency>
@@ -25,11 +29,6 @@
 			<version>1.7.22</version>
 		</dependency>
 		<dependency>
-			<groupId>org.openkoreantext</groupId>
-			<artifactId>open-korean-text</artifactId>
-			<version>2.1.0</version>
-		</dependency>
-		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
@@ -38,6 +37,11 @@
 			<groupId>com.google.collections</groupId>
 			<artifactId>google-collections</artifactId>
 			<version>1.0-rc2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.open-korean-text</groupId>
+			<artifactId>open-korean-text</artifactId>
+			<version>open-korean-text-2.1.2</version>
 		</dependency>
 	</dependencies>
 	<build>
